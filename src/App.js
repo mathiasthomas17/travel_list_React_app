@@ -29,13 +29,20 @@ function Form() {
   // Handle Submit
   function HandleSubmit(e) {
     e.preventDefault();
-    console.log(e);
+    // Guard clause
+    if (!description) return;
+    // update/Reset state after submit
+    setDescription("");
+    setQuantity(1);
   }
 
   return (
     <form className="add-form" onSubmit={HandleSubmit}>
       <h2>All you need in a trip</h2>
-      <select value={quantity} onChange={(e) => setQuantity(e.target.value)}>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
           <option value={num} key={num}>
             {num}
